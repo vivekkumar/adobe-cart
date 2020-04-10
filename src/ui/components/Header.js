@@ -3,37 +3,37 @@ import { connect } from "react-redux";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 import CartIcon from "./CartIcon";
+import Search from "./Search";
 
 function Header({ cartItemCount }) {
   return (
     <div className="row bg-primary py-3">
-      <div className="col-2">
-        <FontAwesomeIcon
-          icon={faStar}
-          size="3x"
-          color="#fff"
-          className="text-warning"
-        />
+      <div className="col-2 col-sm-1">
+        <Link to="/">
+          <FontAwesomeIcon
+            icon={faStar}
+            size="3x"
+            color="#fff"
+            className="text-warning"
+          />
+        </Link>
       </div>
-      <div className="col-8 text-right pt-2">
-        <input
-          type="text"
-          className="bg-transparent border border-top-0 border-left-0 border-right-0 border-bottom-1 border-light"
-        />
-        <FontAwesomeIcon icon={faSearch} size="2x" color="#fff" />
+      <div className="col-8 col-sm-10 text-right pt-2">
+        <Search />
       </div>
-      <div className="col-2 pt-2">
-        <CartIcon cartItemCount={cartItemCount} />
+      <div className="col-2 col-sm-1 pt-2">
+        <Link to="/cart">
+          <CartIcon cartItemCount={cartItemCount} />
+        </Link>
       </div>
     </div>
   );
 }
 
 const mapStateToProps = state => {
-  console.log("STATE", state);
   return {
     cartItemCount: state.cart.length
   };

@@ -21,13 +21,12 @@ class Home extends React.Component {
 
   render() {
     const { items, error, loading } = this.props;
-    console.log("items", items);
     return (
       <>
         <div className="row text-center">
           <div className="col-6 border-right py-2">
             <h4>
-              <FontAwesomeIcon icon={faSort} size="10px" className="mr-1" />
+              <FontAwesomeIcon icon={faSort} className="mr-1" />
               <small>Sort</small>
             </h4>
           </div>
