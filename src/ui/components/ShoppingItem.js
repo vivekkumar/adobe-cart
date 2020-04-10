@@ -3,12 +3,14 @@ import React from "react";
 export default ({ item, addToCart }) => {
   const { name, price, discount } = item;
   return (
-    <div className="col-6 col-sm-3 border-top border-left pt-3">
-      <img
-        className="img-fluid"
-        src="https://picsum.photos/200/250"
-        alt={name}
-      />
+    <div>
+      <div className="text-center">
+        <img
+          className="img-fluid"
+          src="https://picsum.photos/200/250"
+          alt={name}
+        />
+      </div>
       <p>{name}</p>
       <div className="row">
         <div className="col-3 font-weight-bold">&#8377;{price.actual}</div>

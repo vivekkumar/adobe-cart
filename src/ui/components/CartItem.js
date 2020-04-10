@@ -15,14 +15,14 @@ export default ({ itemGroup, onRemoveAll, onCountChange }) => {
     <div className="col card">
       <div className="row py-3">
         <img
-          className="col-5 col-sm-2 img-fluid"
+          className="col-5 col-md-2 img-fluid"
           src="https://picsum.photos/200/250"
           alt={name}
         />
 
-        <div className="col-7 col-sm-10">
+        <div className="col-7 col-md-10">
           <div className="row">
-            <div className="col-sm-4">
+            <div className="col-md-4">
               <p>{name}</p>
               <div>
                 <strong>&#8377;{price.actual}</strong>
@@ -31,8 +31,8 @@ export default ({ itemGroup, onRemoveAll, onCountChange }) => {
                 <strong className="text-success">{`${discount}% off`}</strong>
               </div>
             </div>
-            <div className="col-sm-4">
-              <div className="input-group p-2">
+            <div className="col-md-4">
+              <div className="input-group" style={{ width: "120px" }}>
                 <div className="input-group-prepend">
                   <span
                     className="input-group-text"
@@ -48,7 +48,7 @@ export default ({ itemGroup, onRemoveAll, onCountChange }) => {
                 />
                 <div className="input-group-append">
                   <span
-                    className="input-group-text"
+                    className="input-group-text cursor-pointer"
                     onClick={() => handleCountChange(1)}
                   >
                     <FontAwesomeIcon icon={faPlusCircle} />
@@ -56,7 +56,7 @@ export default ({ itemGroup, onRemoveAll, onCountChange }) => {
                 </div>
               </div>
             </div>
-            <div className="col-sm-4 my-1">
+            <div className="col-md-4 my-1">
               <h5
                 className="font-weight-bold"
                 onClick={() => onRemoveAll(item)}

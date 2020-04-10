@@ -11,7 +11,7 @@ import Search from "./Search";
 function Header({ cartItemCount }) {
   return (
     <div className="row bg-primary py-3">
-      <div className="col-2 col-sm-1">
+      <div className="col-1">
         <Link to="/">
           <FontAwesomeIcon
             icon={faStar}
@@ -21,11 +21,9 @@ function Header({ cartItemCount }) {
           />
         </Link>
       </div>
-      <div className="col-8 col-sm-10 text-right pt-2">
+      <div className="col-11 text-right pt-2">
         <Search />
-      </div>
-      <div className="col-2 col-sm-1 pt-2">
-        <Link to="/cart">
+        <Link to="/cart" className="mx-3">
           <CartIcon cartItemCount={cartItemCount} />
         </Link>
       </div>

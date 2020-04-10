@@ -23,7 +23,7 @@ class Home extends React.Component {
     const { items, error, loading } = this.props;
     return (
       <>
-        <div className="row text-center">
+        <div className="row text-center d-md-none">
           <div className="col-6 border-right py-2">
             <h4>
               <FontAwesomeIcon icon={faSort} className="mr-1" />
@@ -38,28 +38,44 @@ class Home extends React.Component {
           </div>
         </div>
         <div className="row border-right border-bottom">
-          {items &&
-            items.map((item, index) => (
-              <ShoppingItem
-                key={index}
-                item={item}
-                addToCart={this.addToCart}
-              />
-            ))}
-          {error && <div className="col-12 color-red">{error}</div>}
-          {loading && <div className="col-12">{loading}</div>}
+          <div className="col-md-3 col-lg-2">Side bar filter</div>
+          <div className="col-md-9 col-lg-10">
+            <div className="row text-center d-md-none d-lg-block">
+              <div className="col-6 border-right py-2">MD</div>
+            </div>
+            <div className="row">
+              {items &&
+                items.map((item, index) => (
+                  <div
+                    className="col-6 col-md-4 col-xl-2 border-top border-left pt-3"
+                    key={index}
+                  >
+                    <ShoppingItem item={item} addToCart={this.addToCart} />
+                  </div>
+                ))}
+            </div>
+
+            {error && <div className="col-12 color-red">{error}</div>}
+            {loading && <div className="col-12">{loading}</div>}
+          </div>
         </div>
       </>
     );
   }
 }
 
+const getSearchedItems = (items, searchQuery) => {
+  return items.filter(item => item.name.indexOf(searchQuery) > -1);
+};
+
 const mapStateToProps = state => {
   const { items, error, loading } = state.shoppingList;
+  const { searchQuery } = state;
   return {
-    items,
+    items: getSearchedItems(items, searchQuery),
     error,
-    loading
+    loading,
+    searchQuery
   };
 };
 

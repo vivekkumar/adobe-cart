@@ -31,31 +31,33 @@ class Cart extends React.Component {
   render() {
     const { itemGroup } = this.props;
     return (
-      <div className="row">
-        <div className="col-sm-8">
-          {itemGroup &&
-            itemGroup.map((group, index) => (
-              <div className="row mb-2" key={index}>
-                <CartItem
-                  itemGroup={group}
-                  onRemoveAll={this.removeAll}
-                  onCountChange={this.updateCount}
-                />
-              </div>
-            ))}
+      <div className="container mt-2">
+        <div className="row">
+          <div className="col-md-8">
+            {itemGroup &&
+              itemGroup.map((group, index) => (
+                <div className="row mb-2" key={index}>
+                  <CartItem
+                    itemGroup={group}
+                    onRemoveAll={this.removeAll}
+                    onCountChange={this.updateCount}
+                  />
+                </div>
+              ))}
 
-          {itemGroup.length === 0 && (
-            <div className="col text-center p-4">
-              <h2 className="">No Items found!</h2>
-              <Link to="/">Keep Shopping</Link>
+            {itemGroup.length === 0 && (
+              <div className="col text-center p-4">
+                <h2 className="">No Items found!</h2>
+                <Link to="/">Keep Shopping</Link>
+              </div>
+            )}
+          </div>
+          {itemGroup.length !== 0 && (
+            <div className="col-md-4">
+              <PriceDetails itemGroup={itemGroup} />
             </div>
           )}
         </div>
-        {itemGroup.length !== 0 && (
-          <div className="col-sm-4">
-            <PriceDetails itemGroup={itemGroup} />
-          </div>
-        )}
       </div>
     );
   }
