@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import ShoppingItem from "../../components/ShoppingItem";
 
 import { getShoppingList } from "../../../store/actions/shoppintListActions";
+import { setSearchQuery } from "../../../store/actions/searchActions";
 import { addToCart } from "../../../store/actions/cartActions";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -13,6 +14,11 @@ import { faFilter } from "@fortawesome/free-solid-svg-icons";
 class Home extends React.Component {
   componentDidMount() {
     this.props.getShpopingItems();
+    this.props.resetSearch();
+  }
+
+  componentWillMount() {
+    this.props.resetSearch();
   }
 
   addToCart = item => {
@@ -82,7 +88,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     addToCart: cartItem => dispatch(addToCart(cartItem)),
-    getShpopingItems: () => dispatch(getShoppingList())
+    getShpopingItems: () => dispatch(getShoppingList()),
+    resetSearch: () => dispatch(setSearchQuery(""))
   };
 };
 

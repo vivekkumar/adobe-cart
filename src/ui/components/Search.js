@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -6,11 +6,8 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 import { setSearchQuery } from "../../store/actions/searchActions";
 
-const Search = ({ dispatch }) => {
-  const [query, setQuery] = useState("xcxzc");
-
+const Search = ({ query, dispatch }) => {
   const handleChange = e => {
-    setQuery(e.target.value);
     dispatch(setSearchQuery(e.target.value));
   };
 
@@ -28,6 +25,8 @@ const Search = ({ dispatch }) => {
 };
 
 export default connect(
-  null,
+  state => {
+    return { query: state.searchQuery };
+  },
   null
 )(Search);
