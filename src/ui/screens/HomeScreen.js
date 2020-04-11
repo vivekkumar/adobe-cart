@@ -4,11 +4,17 @@ import { connect } from "react-redux";
 import { getShoppingList } from "../../store/actions/shoppintListActions";
 import { setSearchQuery } from "../../store/actions/searchActions";
 import { addToCart } from "../../store/actions/cartActions";
+import { setSortOption } from "../../store/actions/sortActions";
+import { setPriceRangeFilter } from "../../store/actions/filterActions";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSort } from "@fortawesome/free-solid-svg-icons";
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
 import ShoppingItem from "../components/ShoppingItem";
+import Sort from "../components/Sort";
+import RangeInput from "../components/RangeInput";
+
+import { SortOptions, FilterOptions } from "../../config/appConfig";
 
 import { getFilterdItems } from "../../utils/commonHelpers";
 
@@ -26,8 +32,23 @@ class Home extends React.Component {
     this.props.addToCart(item);
   };
 
+  handleSort = sOption => {
+    this.props.setSortOption(sOption);
+  };
+
+  handleFilter = range => {
+    this.props.setPriceRange(range);
+  };
+
+  resetFilter = () => {
+    this.props.setPriceRange(FilterOptions[0].range);
+  };
+
   render() {
-    const { items, error, loading } = this.props;
+    const { items, error, loading, sort, filter } = this.props;
+    const currentFilterOption = FilterOptions[0];
+    const { range } = currentFilterOption;
+    const { priceRange } = filter;
     return (
       <>
         <div className="row text-center d-md-none">
@@ -46,13 +67,26 @@ class Home extends React.Component {
         </div>
         <div className="row border-right border-bottom">
           <div className="col-md-3 col-lg-2 d-none d-md-block">
-            Side bar filter
-          </div>
-          <div className="col-md-9 col-lg-10">
-            <div className="row text-center  d-none d-md-block">
-              <div className="col-6 border-right py-2">MD</div>
+            <div className="mt-4">
+              <strong className="font-weight-bold">Filter</strong>
             </div>
+            <RangeInput
+              range={range}
+              min={priceRange[0]}
+              max={priceRange[1]}
+              onApply={this.handleFilter}
+              onCancel={this.resetFilter}
+            />
+          </div>
+          <div className="col-md-9 col-lg-10 h-100 bg-light">
             <div className="row">
+              <div className="col-12 d-none d-md-block border-right py-2">
+                <Sort
+                  sortOptions={SortOptions}
+                  activeValue={sort.value}
+                  handleSelection={this.handleSort}
+                />
+              </div>
               {items &&
                 items.map((item, index) => (
                   <div
@@ -75,12 +109,15 @@ class Home extends React.Component {
 
 const mapStateToProps = state => {
   const { items, error, loading } = state.shoppingList;
-  const { searchQuery } = state;
+  const { searchQuery, sort, filter } = state;
+  console.log(filter);
   return {
-    items: getFilterdItems(items, "name", searchQuery),
+    items: getFilterdItems(items, { searchQuery, sort }),
     error,
     loading,
-    searchQuery
+    searchQuery,
+    sort,
+    filter
   };
 };
 
@@ -88,7 +125,9 @@ const mapDispatchToProps = dispatch => {
   return {
     addToCart: cartItem => dispatch(addToCart(cartItem)),
     getShpopingItems: () => dispatch(getShoppingList()),
-    resetSearch: () => dispatch(setSearchQuery(""))
+    resetSearch: () => dispatch(setSearchQuery("")),
+    setSortOption: sOption => dispatch(setSortOption(sOption)),
+    setPriceRange: range => dispatch(setPriceRangeFilter(range))
   };
 };
 

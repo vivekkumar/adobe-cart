@@ -1,7 +1,9 @@
-export const getFilterdItems = (items, key, filterString) => {
-  return items.filter(
-    item => item[key].toLowerCase().indexOf(filterString.toLowerCase()) > -1
+export const getFilterdItems = (items, { searchQuery, sort }) => {
+  const filteredList = items.filter(
+    item => item.name.toLowerCase().indexOf(searchQuery.toLowerCase()) > -1
   );
+
+  return sortBy(filteredList, sort);
 };
 
 export const groupCartItems = cart => {
@@ -42,4 +44,21 @@ export const getPriceDetails = itemGroup => {
     totalDiscount,
     amountPayable
   };
+};
+
+export const sortBy = (collection, sort) => {
+  return collection.sort((c1, c2) => {
+    let v1, v2;
+    if (sort.value !== 2) {
+      // Sort by price
+      v1 = c1.price.actual;
+      v2 = c2.price.actual;
+
+      return sort.value === 0 ? v1 - v2 : v2 - v1;
+    }
+    // Sort by discount
+    v1 = c1.discount;
+    v2 = c2.discount;
+    return v1 - v2;
+  });
 };
