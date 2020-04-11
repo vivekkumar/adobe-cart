@@ -13,12 +13,22 @@ import { faFilter } from "@fortawesome/free-solid-svg-icons";
 import ShoppingItem from "../components/ShoppingItem";
 import Sort from "../components/Sort";
 import RangeInput from "../components/RangeInput";
+import Modal from "../components/Modal";
 
 import { SortOptions, FilterOptions } from "../../config/appConfig";
 
 import { getFilterdItems } from "../../utils/commonHelpers";
 
 class Home extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      filterModalShow: false,
+      sortModalShow: false
+    };
+  }
+
   componentDidMount() {
     this.props.getShpopingItems();
     this.props.resetSearch();
@@ -44,8 +54,17 @@ class Home extends React.Component {
     this.props.setPriceRange(FilterOptions[0].range);
   };
 
+  handleModelHide = () => {
+    this.setState({ filterModalShow: false });
+  };
+
+  showFilterModal = () => {
+    this.setState({ filterModalShow: true });
+  };
+
   render() {
     const { items, error, loading, sort, filter } = this.props;
+    const { filterModalShow } = this.state;
     const currentFilterOption = FilterOptions[0];
     const { range } = currentFilterOption;
     const { priceRange } = filter;
@@ -59,7 +78,7 @@ class Home extends React.Component {
             </h4>
           </div>
           <div className="col-6 py-2">
-            <h4>
+            <h4 onClick={this.showFilterModal}>
               <FontAwesomeIcon icon={faFilter} size="xs" className="mr-1" />
               <small>Filter</small>
             </h4>
@@ -101,6 +120,19 @@ class Home extends React.Component {
             {error && <div className="col-12 color-red">{error}</div>}
             {loading && <div className="col-12">{loading}</div>}
           </div>
+          <Modal
+            show={filterModalShow}
+            id="my-modal"
+            onHide={this.handleModelHide}
+          >
+            <RangeInput
+              range={range}
+              min={priceRange[0]}
+              max={priceRange[1]}
+              onApply={this.handleFilter}
+              onCancel={this.resetFilter}
+            />
+          </Modal>
         </div>
       </>
     );
@@ -108,9 +140,9 @@ class Home extends React.Component {
 }
 
 const mapStateToProps = state => {
-  const { items, error, loading } = state.shoppingList;
-  const { searchQuery, sort, filter } = state;
-  console.log(filter);
+  const { shoppingList, searchQuery, sort, filter } = state;
+  const { items, error, loading } = shoppingList;
+
   return {
     items: getFilterdItems(items, { searchQuery, sort }),
     error,
