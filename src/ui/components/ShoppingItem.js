@@ -13,11 +13,12 @@ export default ({ item, addToCart }) => {
       </div>
       <p>{name}</p>
       <div className="row">
-        <div className="col-3 font-weight-bold">&#8377;{price.actual}</div>
-        <div className="col-3 text-muted">
-          <del>{price.display}</del>
+        <div className="col-6 pr-0">
+          <span className="font-weight-bold">&#8377;{price.actual}</span>
+          {"   "}
+          <del className="text-muted">&#8377;{price.display}</del>
         </div>
-        <div className="col-6 font-weight-bold text-success text-right font">{`${discount}% off`}</div>
+        <div className="col-6 pl-0 font-weight-bold text-success text-right font">{`${discount}% off`}</div>
       </div>
       <div className="my-4 text-center">
         <button

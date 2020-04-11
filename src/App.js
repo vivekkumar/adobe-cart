@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "./ui/components/Header";
-import Home from "./ui/screens/Home/";
-import Cart from "./ui/screens/Cart/";
+import Home from "./ui/screens/HomeScreen";
+import Cart from "./ui/screens/CartScreen";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 

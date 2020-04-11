@@ -1,10 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
-import { addToCart, removeFromCart } from "../../../store/actions/cartActions";
+import { addToCart, removeFromCart } from "../../store/actions/cartActions";
 import { Link } from "react-router-dom";
 
-import CartItem from "../../components/CartItem";
-import PriceDetails from "../../components/PriceDetails";
+import CartItem from "../components/CartItem";
+import PriceDetails from "../components/PriceDetails";
 
 class Cart extends React.Component {
   removeItemFromCart = item => {

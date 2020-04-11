@@ -1,11 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import ShoppingItem from "../../components/ShoppingItem";
+import ShoppingItem from "../components/ShoppingItem";
 
-import { getShoppingList } from "../../../store/actions/shoppintListActions";
-import { setSearchQuery } from "../../../store/actions/searchActions";
-import { addToCart } from "../../../store/actions/cartActions";
+import { getShoppingList } from "../../store/actions/shoppintListActions";
+import { setSearchQuery } from "../../store/actions/searchActions";
+import { addToCart } from "../../store/actions/cartActions";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSort } from "@fortawesome/free-solid-svg-icons";
@@ -44,9 +44,11 @@ class Home extends React.Component {
           </div>
         </div>
         <div className="row border-right border-bottom">
-          <div className="col-md-3 col-lg-2">Side bar filter</div>
+          <div className="col-md-3 col-lg-2 d-none d-md-block">
+            Side bar filter
+          </div>
           <div className="col-md-9 col-lg-10">
-            <div className="row text-center d-md-none d-lg-block">
+            <div className="row text-center  d-none d-md-block">
               <div className="col-6 border-right py-2">MD</div>
             </div>
             <div className="row">
