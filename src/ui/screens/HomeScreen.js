@@ -1,8 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import ShoppingItem from "../components/ShoppingItem";
-
 import { getShoppingList } from "../../store/actions/shoppintListActions";
 import { setSearchQuery } from "../../store/actions/searchActions";
 import { addToCart } from "../../store/actions/cartActions";
@@ -10,6 +8,9 @@ import { addToCart } from "../../store/actions/cartActions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSort } from "@fortawesome/free-solid-svg-icons";
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
+import ShoppingItem from "../components/ShoppingItem";
+
+import { getFilterdItems } from "../../utils/commonHelpers";
 
 class Home extends React.Component {
   componentDidMount() {
@@ -72,15 +73,11 @@ class Home extends React.Component {
   }
 }
 
-const getSearchedItems = (items, searchQuery) => {
-  return items.filter(item => item.name.indexOf(searchQuery) > -1);
-};
-
 const mapStateToProps = state => {
   const { items, error, loading } = state.shoppingList;
   const { searchQuery } = state;
   return {
-    items: getSearchedItems(items, searchQuery),
+    items: getFilterdItems(items, "name", searchQuery),
     error,
     loading,
     searchQuery

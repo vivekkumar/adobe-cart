@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import CartItem from "../components/CartItem";
 import PriceDetails from "../components/PriceDetails";
 
+import { groupCartItems } from "../../utils/commonHelpers";
+
 class Cart extends React.Component {
   removeItemFromCart = item => {
     this.props.removeItem(item);
@@ -62,23 +64,6 @@ class Cart extends React.Component {
     );
   }
 }
-
-const groupCartItems = cart => {
-  let group = {};
-
-  for (let i = 0; i < cart.length; i++) {
-    let name = cart[i].name;
-    if (!group[name]) {
-      group[name] = {
-        item: cart[i],
-        count: 0
-      };
-    }
-    group[name].count++;
-  }
-
-  return Object.values(group);
-};
 
 const mapStateToProps = state => {
   return {
