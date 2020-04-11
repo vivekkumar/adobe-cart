@@ -56,23 +56,29 @@ class Home extends React.Component {
 
   handleModelHide = () => {
     this.setState({ filterModalShow: false });
+    this.setState({ sortModalShow: false });
   };
 
   showFilterModal = () => {
     this.setState({ filterModalShow: true });
   };
 
+  showSortModal = () => {
+    this.setState({ sortModalShow: true });
+  };
+
   render() {
     const { items, error, loading, sort, filter } = this.props;
-    const { filterModalShow } = this.state;
+    const { filterModalShow, sortModalShow } = this.state;
     const currentFilterOption = FilterOptions[0];
     const { range } = currentFilterOption;
     const { priceRange } = filter;
+
     return (
       <>
         <div className="row text-center d-md-none">
           <div className="col-6 border-right py-2">
-            <h4>
+            <h4 onClick={this.showSortModal}>
               <FontAwesomeIcon icon={faSort} className="mr-1" />
               <small>Sort</small>
             </h4>
@@ -122,7 +128,7 @@ class Home extends React.Component {
           </div>
           <Modal
             show={filterModalShow}
-            id="my-modal"
+            id="modal-filter"
             onHide={this.handleModelHide}
           >
             <RangeInput
@@ -130,7 +136,21 @@ class Home extends React.Component {
               min={priceRange[0]}
               max={priceRange[1]}
               onApply={this.handleFilter}
-              onCancel={this.resetFilter}
+              onCancel={this.handleModelHide}
+            />
+          </Modal>
+
+          <Modal
+            show={sortModalShow}
+            id="model-sort"
+            onHide={this.handleModelHide}
+          >
+            <Sort
+              sortOptions={SortOptions}
+              activeValue={sort.value}
+              handleSelection={this.handleSort}
+              onCancel={this.handleModelHide}
+              onApply={this.handleSort}
             />
           </Modal>
         </div>
