@@ -1,4 +1,4 @@
-export const ShoppingAPI = "https://api.jsonbin.io/b/5e8c3a45af7c476bc47e477d";
+export const ShoppingAPI = "https://api.jsonbin.io/b/5e8c3ad0ff9c906bdf1d5380";
 
 export const SortOptions = [
   { text: "Price -- High Low", value: 0 },
