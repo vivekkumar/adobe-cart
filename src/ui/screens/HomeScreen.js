@@ -137,6 +137,7 @@ class Home extends React.Component {
             id="modal-filter"
             onHide={this.handleModelHide}
           >
+            <h5 className="border-bottom pb-3 mb-4">Filter Options</h5>
             <RangeInput
               range={range}
               min={priceRange[0]}

@@ -42,7 +42,7 @@ const RangeInput = ({ range, min, max, onApply, onCancel }) => {
   };
 
   return (
-    <div className="p-2">
+    <div className="">
       <div className="mb-1 pb-3">
         <strong className="float-left ">&#8377;{minRange}</strong>
         <strong className="float-right">&#8377;{maxRange}</strong>
