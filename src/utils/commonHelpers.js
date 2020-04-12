@@ -1,9 +1,17 @@
-export const getFilterdItems = (items, { searchQuery, sort }) => {
+export const getFilterdItems = (items, { searchQuery, sort, filter }) => {
   const filteredList = items.filter(
     item => item.name.toLowerCase().indexOf(searchQuery.toLowerCase()) > -1
   );
 
-  return sortBy(filteredList, sort);
+  const pricedFilter = filterByPriceRange(filteredList, filter.priceRange);
+
+  return sortBy(pricedFilter, sort);
+};
+
+export const filterByPriceRange = (items, range) => {
+  return items.filter(
+    item => item.price.actual >= range[0] && item.price.actual <= range[1]
+  );
 };
 
 export const groupCartItems = cart => {

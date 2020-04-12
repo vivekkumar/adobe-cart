@@ -124,7 +124,11 @@ class Home extends React.Component {
                   </div>
                 ))}
             </div>
-
+            {items.length === 0 && !loading && (
+              <h2 className="text-center w-100 bg-transparent">
+                No items found!
+              </h2>
+            )}
             {error && <div className="col-12 color-red">{error}</div>}
             {loading && <div className="col-12">{loading}</div>}
           </div>
@@ -166,7 +170,7 @@ const mapStateToProps = state => {
   const { items, error, loading } = shoppingList;
 
   return {
-    items: getFilterdItems(items, { searchQuery, sort }),
+    items: getFilterdItems(items, { searchQuery, sort, filter }),
     error,
     loading,
     searchQuery,
