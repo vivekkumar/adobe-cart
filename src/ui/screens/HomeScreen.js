@@ -44,10 +44,12 @@ class Home extends React.Component {
 
   handleSort = sOption => {
     this.props.setSortOption(sOption);
+    this.handleModelHide();
   };
 
   handleFilter = range => {
     this.props.setPriceRange(range);
+    this.handleModelHide();
   };
 
   resetFilter = () => {
@@ -75,7 +77,7 @@ class Home extends React.Component {
     const { priceRange } = filter;
 
     return (
-      <>
+      <div className="min-vh-100">
         <div className="row text-center d-md-none">
           <div className="col-6 border-right py-2">
             <h4 onClick={this.showSortModal}>
@@ -154,7 +156,7 @@ class Home extends React.Component {
             />
           </Modal>
         </div>
-      </>
+      </div>
     );
   }
 }

@@ -33,7 +33,7 @@ class Cart extends React.Component {
   render() {
     const { itemGroup } = this.props;
     return (
-      <div className="container mt-2">
+      <div className="container mt-2 min-vh-100">
         <div className="row">
           <div className="col-md-8">
             {itemGroup &&

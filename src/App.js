@@ -2,6 +2,7 @@ import React from "react";
 import Header from "./ui/components/Header";
 import Home from "./ui/screens/HomeScreen";
 import Cart from "./ui/screens/CartScreen";
+import Footer from "./ui/components/Footer";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
@@ -20,6 +21,7 @@ function App() {
           </Route>
         </Switch>
       </Router>
+      <Footer />
     </div>
   );
 }
